@@ -284,7 +284,7 @@ struct FormatInfo
    -   An example on how to use the videoReader class can be found at
         opencv_source_code/samples/gpu/video_reader.cpp
  */
-class CV_EXPORTS VideoReader
+class CV_EXPORTS_W VideoReader
 {
 public:
     virtual ~VideoReader() {}
@@ -294,7 +294,7 @@ public:
     If no frames has been grabbed (there are no more frames in video file), the methods return false .
     The method throws Exception if error occurs.
      */
-    virtual bool nextFrame(OutputArray frame) = 0;
+    CV_WRAP virtual bool nextFrame(OutputArray frame) = 0;
 
     /** @brief Returns information about video file format.
     */
@@ -329,7 +329,7 @@ public:
 
 FFMPEG is used to read videos. User can implement own demultiplexing with cudacodec::RawVideoSource
  */
-CV_EXPORTS Ptr<VideoReader> createVideoReader(const String& filename);
+CV_EXPORTS_W Ptr<VideoReader> createVideoReader(const String& filename);
 /** @overload
 @param source RAW video source implemented by user.
 */

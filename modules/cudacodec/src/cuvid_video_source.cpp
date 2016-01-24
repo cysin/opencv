@@ -61,7 +61,8 @@ cv::cudacodec::detail::CuvidVideoSource::CuvidVideoSource(const String& fname)
 
     // now create the actual source
     CUresult cuRes = cuvidCreateVideoSource(&videoSource_, fname.c_str(), &params);
-    if (cuRes == CUDA_ERROR_INVALID_SOURCE)
+    //if (cuRes == CUDA_ERROR_INVALID_SOURCE)
+    if (cuRes != CUDA_SUCCESS)
         throw std::runtime_error("");
     cuSafeCall( cuRes );
 

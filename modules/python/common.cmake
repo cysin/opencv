@@ -30,6 +30,7 @@ ocv_list_filterout(opencv_hdrs "cuda")
 ocv_list_filterout(opencv_hdrs "cudev")
 ocv_list_filterout(opencv_hdrs "/hal/")
 ocv_list_filterout(opencv_hdrs "detection_based_tracker.hpp") # Conditional compilation
+list(APPEND opencv_hdrs ${OPENCV_MODULE_opencv_cudacodec_HEADERS})
 
 set(cv2_generated_hdrs
     "${CMAKE_CURRENT_BINARY_DIR}/pyopencv_generated_include.h"
