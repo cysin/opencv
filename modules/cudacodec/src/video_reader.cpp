@@ -181,7 +181,7 @@ namespace
             // perform post processing on the CUDA surface (performs colors space conversion and post processing)
             // comment this out if we inclue the line of code seen above
             GpuMat frame_gpu;
-            videoDecPostProcessFrame(decodedFrame, frame, videoDecoder_->targetWidth(), videoDecoder_->targetHeight());
+            videoDecPostProcessFrame(decodedFrame, frame_gpu, videoDecoder_->targetWidth(), videoDecoder_->targetHeight());
             Mat frame_cpu(frame_gpu);
             frame_cpu.copyTo(frame);
             // unmap video frame
