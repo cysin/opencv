@@ -65,7 +65,7 @@ namespace
         explicit VideoReaderImpl(const Ptr<VideoSource>& source);
         ~VideoReaderImpl();
 
-        bool nextFrame(OutputArray frame);
+        bool nextFrame(OutputArray frame, bool mapping = true);
 
         FormatInfo format() const;
 
@@ -122,7 +122,7 @@ namespace
         CUvideoctxlock m_lock;
     };
 
-    bool VideoReaderImpl::nextFrame(OutputArray frame)
+    bool VideoReaderImpl::nextFrame(OutputArray frame, bool mapping)
     {
         if (videoSource_->hasError() || videoParser_->hasError())
             CV_Error(Error::StsUnsupportedFormat, "Unsupported video source");
@@ -172,7 +172,7 @@ namespace
         std::pair<CUVIDPARSERDISPINFO, CUVIDPROCPARAMS> frameInfo = frames_.front();
         frames_.pop_front();
 
-        {
+        if(mapping) {
             VideoCtxAutoLock autoLock(lock_);
 
             // map decoded video frame to CUDA surface
@@ -195,6 +195,10 @@ namespace
 
         return true;
     }
+}
+
+bool cv::cudacodec::setDevice(int deviceID) {
+    return !cudaSetDevice(deviceID);
 }
 
 Ptr<VideoReader> cv::cudacodec::createVideoReader(const String& filename)

@@ -294,7 +294,7 @@ public:
     If no frames has been grabbed (there are no more frames in video file), the methods return false .
     The method throws Exception if error occurs.
      */
-    CV_WRAP virtual bool nextFrame(OutputArray frame) = 0;
+    CV_WRAP virtual bool nextFrame(OutputArray frame, bool mapping = true) = 0;
 
     /** @brief Returns information about video file format.
     */
@@ -334,7 +334,7 @@ CV_EXPORTS_W Ptr<VideoReader> createVideoReader(const String& filename);
 @param source RAW video source implemented by user.
 */
 CV_EXPORTS Ptr<VideoReader> createVideoReader(const Ptr<RawVideoSource>& source);
-
+CV_EXPORTS_W bool setDevice(int deviceID);
 //! @}
 
 }} // namespace cv { namespace cudacodec {
